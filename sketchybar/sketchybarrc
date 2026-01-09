@@ -63,6 +63,7 @@ for monitor in $MONITORS; do
                               icon.padding_right=0 \
                               label.padding_right=0 \
                               label.padding_left=0 \
+                              background.drawing=off \
                               label.font="$FONT:Bold:12.0" \
                               label.y_offset=0 \
                               click_script="aerospace workspace $space" \
