@@ -1,0 +1,34 @@
+
+#!/usr/bin/env sh
+
+# Not using most of these as of now, but here for when I come back for more advanced functionality
+
+# General Icons
+LOADING=󰝲
+APPLE=
+PREFERENCES=
+ACTIVITY=
+LOCK=󰌾
+MAIL=
+MAIL_OPEN=
+BELL=󰂚
+BELL_DOT=
+NEOVIM=
+
+# Git Icons
+GIT=
+GIT_ISSUE=
+GIT_DISCUSSION=
+GIT_PULL_REQUEST=
+GIT_COMMIT=
+GIT_INDICATOR=
+
+SPOTIFY=
+SPOTIFY_PLAY_PAUSE=
+SPOTIFY_NEXT=󰒭
+SPOTIFY_PREV=󰒮
+SPOTIFY_SHUFFLE=
+SPOTIFY_REPEAT=󰑖
+
+BRIGHTNESS=
+BRACKETS=
