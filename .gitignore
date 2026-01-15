@@ -1,4 +1,6 @@
 github-copilot/
 containers/
+.tool-versions
+
 
 lazy-lock.json
