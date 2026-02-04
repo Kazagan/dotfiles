@@ -1,0 +1,115 @@
+
+#Import variables
+source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/icons.sh"
+source "$CONFIG_DIR/functions.sh"
+source "$HOME/.env/sketchybar.sh"
+
+# Plusings need to be compilable
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+FONT="JetBrainsMono Nerd Font Mono"
+
+echo $BAR_COLOR
+# Bar Appearance
+sketchybar --bar position=bottom \
+    height=20 \
+    blur_radius=30 \
+    color=$BAR_COLOR \
+    shadow=on \
+    sticky=on \
+    display=all
+
+default=(
+    padding_left=5
+    padding_right=5
+    icon.font="JetBrainsMono Nerd Font Mono:Bold:24.0"
+    label.font="JetBrainsMono Nerd Font Mono:Bold:16.0"
+    icon.color=$WHITE
+    label.color=$WHITE
+    icon.padding_left=4
+    icon.padding_right=4
+    label.padding_left=4
+    label.padding_right=4
+)
+sketchybar --default "${default[@]}"
+
+# Left
+# Add Aerospace event
+sketchybar --add event aerospace_workspace_change
+
+spaces_order=""
+
+MONITORS=$(aerospace list-monitors --format  %{monitor-id} ) # get aerospace monitors by the nss screen, matches sketchbar display numbers
+for monitor in $MONITORS; do
+    # get spaces per monitor
+    MONITOR_SPACES=$(aerospace list-workspaces --monitor $monitor)
+    for space in $MONITOR_SPACES; do
+        NSSCREEN_ID=$($CONFIG_DIR/plugins/get_monitor.sh $monitor)
+        IS_ACTIVE=0
+        if [ $(aerospace list-workspaces --focused) = $space ]; then
+            IS_ACTIVE=1
+        fi
+
+        # echo "Display: $NSSCREEN_ID Screen: $monitor Space: $space Is Focused: $IS_ACTIVE"
+        space_name="space.$space"
+        space_order+="$space_name "
+
+        sketchybar --add item $space_name left \
+                              --set $space_name display=$NSSCREEN_ID \
+                              --subscribe $space_name aerospace_workspace_change \
+                              --set $space_name \
+                              padding_left=0 \
+                              padding_right=5 \
+                              label="$(get_label $space)" \
+                              icon.padding_left=0 \
+                              icon.padding_right=0 \
+                              label.padding_right=0 \
+                              label.padding_left=0 \
+                              background.drawing=off \
+                              label.font="$FONT:Bold:24.0" \
+                              label.y_offset=0 \
+                              click_script="aerospace workspace $space" \
+                              script="$CONFIG_DIR/plugins/aerospace.sh $space"
+    done
+done
+
+# sketchybar --add item reorder left \
+#                       --subscribe reorder aerospace_workspace_change \
+#                       --set reorder \
+#                       icon="" \
+#                       icon.padding_left=10 \
+#                       label.padding_right=10 \
+#                       label.padding_left=0 \
+#                       label.font="$FONT:Regular:16.0" \
+#                       label.y_offset=0 \
+#                       click_script="sketchybar --reorder $space_order reorder" \
+
+# Centered
+sketchybar --add item   apple.logo center \
+    --set apple.logo    icon=$APPLE \
+                        icon.font="$FONT:BOLD:16:0" \
+                        icon.color=$WHITE \
+                        label=$EMPLOYER \
+                        label.color=$WHITE \
+                        label.font="Chalkboard SE:Bold:16.0" 
+                        # label.drawing=off
+
+sketchybar --add event grip_workout
+# Right
+sketchybar --add item clock right \
+           --set clock update_freq=30 icon=  script="$PLUGIN_DIR/clock.sh" \
+           --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change \
+           --add item battery right \
+           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery system_woke power_source_change \
+           --add item grip_set right \
+           --set grip_set script="$PLUGIN_DIR/grip.sh" \
+           --subscribe grip_set grip_workout
+
+
+
+# Run all scripts at the start
+sketchybar --update
+           
