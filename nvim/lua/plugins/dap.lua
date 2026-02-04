@@ -44,9 +44,9 @@ return {
     {
         "ramboe/ramboe-dotnet-utils",
         dependencies = { "mfussenegger/nvim-dap" }
-    },
-    {
-        "Cliffback/netcoredbg-macOS-arm64.nvim",
-        dependencies = { "mfussenegger/nvim-dap" }
     }
+    -- {
+    --     "Cliffback/netcoredbg-macOS-arm64.nvim",
+    --     dependencies = { "mfussenegger/nvim-dap" }
+    -- }
 }

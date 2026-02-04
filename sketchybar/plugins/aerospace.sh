@@ -14,11 +14,11 @@ FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
 # echo -e "input: $1\tFocused: $FOCUSED_WORKSPACE\tMonitor Changed: $MONITOR_CHANGE\tIs Focused: $IS_FOCUSED"
 
 if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
-  sketchybar --set space.$1 label.color=$RED icon.color=$RED
+  sketchybar --set space.$1 label.color=$VIOLET icon.color=$RED
 
 # background.color=0x88FF00FF
 else
-  sketchybar --set space.$1 label.color=$WHITE icon.color=$WHITE
+  sketchybar --set space.$1 label.color=$WHITE icon.color=$BLUE
 fi
   
 display=$($CONFIG_DIR/plugins/get_display_by_workspace.sh $1)

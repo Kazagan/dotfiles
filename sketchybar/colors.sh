@@ -3,7 +3,7 @@
 # Color Palette
 BLACK=0xff181926
 WHITE=0xffcad3f5
-RED=0xa8ba0000
+RED=0xa8ff0000
 GREEN=0xffa6da95
 BLUE=0xff8aadf4
 DARK_BLUE=0xff004dff
@@ -11,6 +11,7 @@ YELLOW=0xffeed49f
 ORANGE=0xfff5a97f
 MAGENTA=0xffc6a0f6
 GREY=0xff939ab7
+VIOLET=0xff9400d3
 TRANSPARENT=0x00000000
 
 # General bar colors

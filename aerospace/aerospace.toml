@@ -187,9 +187,9 @@ on-mode-changed = []
 if.app-id = 'com.microsoft.teams2'
 run = 'move-node-to-workspace 2'
 
-[[on-window-detected]]
-# App Rider -> 4
-if.app-id = 'com.jetbrains.rider'
-run = 'move-node-to-workspace 4'
+# [[on-window-detected]]
+# # App Rider -> 4
+# if.app-id = 'com.jetbrains.rider'
+# run = 'move-node-to-workspace 4'
 
 

@@ -17,8 +17,8 @@ require('gitsigns').setup {
     },
     signs_staged_enable          = true,
     signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
-    numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
-    linehl                       = true,  -- Toggle with `:Gitsigns toggle_linehl`
+    numhl                        = true,  -- Toggle with `:Gitsigns toggle_numhl`
+    linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
     word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
     watch_gitdir                 = {
         follow_files = true
@@ -37,8 +37,8 @@ require('gitsigns').setup {
     current_line_blame_formatter = '<author>, <author_time:%R> - <summary>',
     sign_priority                = 6,
     update_debounce              = 100,
-    status_formatter             = nil,   -- Use default
-    max_file_length              = 40000, -- Disable if file is longer than this (in lines)
+    status_formatter             = nil,     -- Use default
+    max_file_length              = 1000000, -- Disable if file is longer than this (in lines)
     preview_config               = {
         -- Options passed to nvim_open_win
         style = 'minimal',
@@ -74,40 +74,39 @@ require('gitsigns').setup {
         end)
 
         -- Actions
-        map('n', '<leader>hs', gitsigns.stage_hunk)
-        map('n', '<leader>hr', gitsigns.reset_hunk)
+        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'stage hunk' })
+        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'reset hunk' })
 
         map('v', '<leader>hs', function()
             gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-        end)
+        end, { desc = 'stage hunk' })
 
         map('v', '<leader>hr', function()
             gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-        end)
+        end, { desc = 'reset hunk' })
 
-        map('n', '<leader>hS', gitsigns.stage_buffer)
-        map('n', '<leader>hR', gitsigns.reset_buffer)
-        map('n', '<leader>hp', gitsigns.preview_hunk)
-        map('n', '<leader>hi', gitsigns.preview_hunk_inline)
+        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'stage buffer' })
+        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'reset buffer' })
+        map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'preview hunk' })
+        map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = 'preview inline' })
 
         map('n', '<leader>hb', function()
             gitsigns.blame_line({ full = true })
-        end)
+        end, { desc = 'git blame' })
 
-        map('n', '<leader>hd', gitsigns.diffthis)
+        map('n', '<leader>hd', gitsigns.diffthis, { desc = 'diff this' })
 
         map('n', '<leader>hD', function()
             gitsigns.diffthis('~')
         end)
 
-        map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
-        map('n', '<leader>hq', gitsigns.setqflist)
-        map('n', '<leader>hl', function() gitsigns.toggle_hl() end, { desc = 'toggle highlight line' })
-        map('n', '<leader>hw', function() gitsigns.toggle_word_diff() end, { desc = 'toggle word diff' })
+        map('n', '<leader>hQ', function() gitsigns.setqflist('all') end, { desc = 'add all to quick list' })
+        map('n', '<leader>hq', gitsigns.setqflist, { desc = 'set quick list' })
+        map('n', '<leader>tl', gitsigns.toggle_linehl, { desc = 'toggle highlight line' })
 
         -- Toggles
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-        map('n', '<leader>tw', gitsigns.toggle_word_diff)
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = 'toggle current line blame' })
+        map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = 'toggle word diff' })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)

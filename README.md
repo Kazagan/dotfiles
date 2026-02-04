@@ -16,7 +16,7 @@ ___
 - [ ] Get debug working
 - [ ] Setup Front End test running and debugging
 - [ ] Setup and learn a git tool  (might skip, preference for terminal commands)
-- [ ] Get Actions to fix bugs (gra)
+- [ ] Setup live_grep to grab value under cursor, and be able to pass file type
 
 --- 
 
