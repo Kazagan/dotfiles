@@ -1,0 +1,14 @@
+github-copilot/
+containers/
+BraveSoftware/
+cosmic/
+dconf/
+pulse/
+yay/
+go/
+
+
+.tool-versions
+kwalletrc
+mimeapps.lis
+lazy-lock.json
